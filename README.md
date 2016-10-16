@@ -7,12 +7,12 @@
 Can be done with a combo of `vim` and `ag`: (http://unix.stackexchange.com/a/20255/94874)
 
 ```
-ag -l --ignore-dir="node_modules" "var" ./ | xargs -l vim -c '%s/var/let/gc' -c 'wq'
+ag -l --ignore-dir="node_modules" "var" ./ | xargs -l vim -u NONE -c '%s/var/let/gc' -c 'wq'
 ```
 
 **Optional Extra**
 
-Add the switch `-u NONE` to the `vim` command to ignore your `vimrc` config files.
+The switch `-u NONE` on the `vim` command will ignore your `vimrc` config files.
 This is useful if you get parsing errors, etc, due to syntax highlighters or slow linters.
 
 **How it works**

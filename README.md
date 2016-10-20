@@ -36,7 +36,7 @@ find ./ -type d -path "./**/node_modules"
 Perform the deletion with confirmation:
 
 ```
-find ./ -type d -path "./**/node_modules" -exec rm -r {} \;
+find ./ -type d -path "./**/node_modules" -exec sh -c 'read -p "delete {}? [y to proceed] " -n 1 -r REPLY && echo && [[ $REPLY =~ ^[Yy]$ ]] && rm -rf {}' \;
 ```
 
 **How it works**
@@ -45,5 +45,8 @@ find ./ -type d -path "./**/node_modules" -exec rm -r {} \;
 
 `-path X` expands `X` as a glob, and matches only against that path.
 
-`-exec` executes the `rm` command,
+`-exec sh -c` runs a new shell instance to execute the following commands
 where `{}` is replaced with the discovered file path. (`\;` ends the `-exec` option).
+
+The shell command [asks for user permission](http://stackoverflow.com/a/1885534/473961)
+before proceeding to do an `rm -rf` on that directory.

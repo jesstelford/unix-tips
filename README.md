@@ -7,7 +7,7 @@
 Can be done with a combo of `vim` and `ag`: (http://unix.stackexchange.com/a/20255/94874)
 
 ```
-SEARCH="var"; REPLACE="let"; ag -l --ignore-dir="node_modules" "$SEARCH" ./ | xargs -o -L 1 vim -u NONE -c "%s/$SEARCH/$REPLACE/gc" -c 'wq'
+SEARCH="var"; REPLACE="let"; ag -l --ignore-dir="node_modules" "$SEARCH" ./ | xargs -I{} -o -L 1 vim -u NONE -c "%s/$SEARCH/$REPLACE/gc" -c 'wq' {}
 ```
 
 **How it works**

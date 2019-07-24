@@ -4,6 +4,13 @@
 
 ### Recursive search & replace with confirmation
 
+UPDATE: try [the `:cdo` command](https://chrisarcand.com/vims-new-cdo-command/):
+
+```
+:Ack foo
+:cdo s/foo/bar/g | update
+```
+
 Can be done with a combo of `vim` and `ag`: (http://unix.stackexchange.com/a/20255/94874)
 
 ```

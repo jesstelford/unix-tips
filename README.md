@@ -14,13 +14,13 @@ UPDATE: try [the `:cdo` command](https://chrisarcand.com/vims-new-cdo-command/):
 Can be done with a combo of `vim` and `ag`: (http://unix.stackexchange.com/a/20255/94874)
 
 ```
-SEARCH="var"; REPLACE="let"; ag -l --ignore-dir="node_modules" "$SEARCH" ./ | xargs -I{} -o -L 1 vim -u NONE -c "%s/$SEARCH/$REPLACE/gc" -c 'wq' {}
+SEARCH="var"; REPLACE="let"; ag -l --ignore-dir="node_modules" "$SEARCH" ./ | xargs -I{} -S1024 -o -L 1 vim -u NONE -c "%s/$SEARCH/$REPLACE/gc" -c 'wq' {}
 ```
 
 **How it works**
 
 This works by first using `ag` to find the list of files containing the pattern `"var"`,
-then passes each file into `vim` one at a time (`xargs -L 1`),
+then passes each file into `vim` one at a time (`xargs -L 1 -S1024`),
 asking for confirmation of the command `%s` (which is the replacement command),
 followed by the command `wq` (which saves and quits after replacing).
 
